@@ -22,23 +22,8 @@ var endpoint = "https://query.wikidata.org/sparql";
 			<h2>JavaScriptによるSPARQL利用サンプル</h2>
 		</div>
 		<div id="right" class="right lodosakaquerymargin">
-			<textarea id="query_area" rows="10" style="width:100%;">
-				select distinct ?actor ?givenNameLabel ?familyNameLabel ?countryLabel ?birth
-				where {
-				  ?actor wdt:P106 wd:Q33999;
-				  wdt:P735 ?givenName;
-				  wdt:P734 ?familyName;
-				  wdt:P27 ?country;
-				  wdt:P569 ?birth.
-				  SERVICE wikibase:label { bd:serviceParam wikibase:language "en" }
-				  FILTER CONTAINS(?birth, "06-17")
-				}</textarea>
-		</div>
-	</div>
-
-	<div class="row">
-		<div class="lodosakamargin">
-			<input type="button" class="btn btn-primary" style="width:100%;" id="find_query" value="Load"/>
+			<input type="number" id="month" value="6" min="01" max="12">月<input type="number" id="date" value="17" min="01" max="31">日
+			<input type="button" class="btn btn-primary" id="find_query" value="検索"/>
 		</div>
 	</div>
 	<!-- 結果ペイン -->
