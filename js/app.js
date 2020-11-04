@@ -4,7 +4,18 @@
 
 	$('#find_query').click(function(){
 		$('body').modalmanager('loading').find('.modal-scrollable').off('click.modalmanager');
-		qr = sendQuery(endpoint,$('#query_area').val().replace(/\n\r/g,""));
+		var query_string = `select distinct ?actor ?givenNameLabel ?familyNameLabel ?countryLabel ?birth
+			where {
+			?actor wdt:P106 wd:Q33999;
+			wdt:P735 ?givenName;
+			wdt:P734 ?familyName;
+			wdt:P27 ?country;
+			wdt:P569 ?birth.
+			SERVICE wikibase:label { bd:serviceParam wikibase:language "en" }
+			FILTER CONTAINS(?birth, "` + ('0' + $('#month').val()).slice(-2) + "-" + ('0' + $('#date').val()).slice(-2) + `")
+			}`;
+		
+		qr = sendQuery(endpoint,query_string.replace(/\n\r/g,""));
 		qr.fail(
 			function (xhr, textStatus, thrownError) {
 				$('body').modalmanager('removeLoading');
