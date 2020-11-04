@@ -11,7 +11,7 @@
 			wdt:P734 ?familyName;
 			wdt:P27 ?country;
 			wdt:P569 ?birth.
-			SERVICE wikibase:label { bd:serviceParam wikibase:language "en" }
+			SERVICE wikibase:label { bd:serviceParam wikibase:language "`+ $('#language').val() + `" }
 			FILTER CONTAINS(?birth, "` + ('0' + $('#month').val()).slice(-2) + "-" + ('0' + $('#date').val()).slice(-2) + `")
 			}`;
 		
